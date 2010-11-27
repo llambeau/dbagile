@@ -35,7 +35,7 @@ module DbAgile
       def start
         myself, env  = self, @environment
         rack_server  = ::Rack::Handler::default
-        rack_app     = ::Rack::Builder.new{ run DbAgile::Restful::Middleware.new(env) }
+        rack_app     = factor_rack_app(env)
         thread       = Thread.new(rack_server, rack_app, options.dup){|s,a,o| 
           s.run(a, o){|server| @server = server}
         }
@@ -58,6 +58,11 @@ module DbAgile
       def stop
         @server.shutdown if @server.respond_to?(:shutdown)
         @server = nil
+      end
+      
+      protected
+      def factor_rack_app(env)
+        ::Rack::Builder.new{ run DbAgile::Restful::Middleware.new(env) }
       end
       
     end # class Server

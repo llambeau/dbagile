@@ -1,5 +1,5 @@
 module DbAgile
-  module Restful
+  module ComplexRestful
     class Middleware
       module Post
       
@@ -13,19 +13,15 @@ module DbAgile
             heading = connection.heading(table)
             keys = connection.keys(table)
             
-            # Tuple to insert/update
-            tuple = params_to_tuple(request.POST, heading)
+            # Tuple to insert
+            # tuple parameter can be a JSON encoded hash or a simple get array
+            # ex: /url?tuple={"language":"ruby","project":"dbagile"}
+            # ex: /url?tuple[language]=ruby&tuple[project]=dbagile
+            tuple = to_tuple_definition(request.POST["tuple"])
+
+            tuple = params_to_tuple(tuple, heading)
             inserted = connection.transaction do |t|
-              if tuple_has_key?(tuple, keys)
-                key_projected = tuple_key(tuple, keys)
-                if connection.exists?(table, key_projected)
-                  t.update(table, tuple, key_projected)
-                else
-                  t.insert(table, tuple)
-                end
-              else
-                t.insert(table, tuple)
-              end
+              t.insert(table, tuple)
             end
             
             [format, to_xxx_enumerable(format, [ inserted ], tuple.keys)]
@@ -34,5 +30,5 @@ module DbAgile
       
       end # module Get
     end # class Middleware
-  end # module Restful
+  end # module ComplexRestful
 end # module Facts

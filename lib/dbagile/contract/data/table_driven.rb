@@ -21,11 +21,12 @@ module DbAgile
         #
         # @param [Symbol | String] table_or_query name of a table or query string
         # @param [Hash | nil] a tuple projection for query restriction
+        # @param [Hash | nil] a sort definition (name => :desc|:asc)
         # @return [...] a dataset object with query (execution result)
         #
         # @pre [table_or_query] all referenced tables must exist
         #
-        def dataset(table_or_query, proj = nil)
+        def dataset(table_or_query, proj = nil, sort = nil)
           Kernel.raise NotImplementedError
         end
       

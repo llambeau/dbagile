@@ -1,11 +1,13 @@
 require 'stringio'
 require 'json'
 require 'dbagile'
+
 require 'dbagile/restful/middleware/utils'
 require 'dbagile/restful/middleware/get'
 require 'dbagile/restful/middleware/post'
 require 'dbagile/restful/middleware/delete'
 require 'dbagile/restful/middleware/one_database'
+
 module DbAgile
   module Restful
     class Middleware
