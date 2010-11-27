@@ -16,10 +16,10 @@ module DbAgile
             # filters parameter can be a JSON encoded hash or a simple get array
             # ex: /url?filters={"language":"ruby","project":"dbagile"}
             # ex: /url?filters[language]=ruby&filters[project]=dbagile
-            filters = to_filters_definition(request.PUT["filters"])
+            filters = to_filters_definition(request.POST["filters"])
   
             # Tuple to insert
-            tuple = params_to_tuple(request.PUT["tuple"], heading)
+            tuple = to_tuple_definition(request.POST["tuple"])
             
             updated = connection.transaction do |t|
               t.update(table, tuple, filters)

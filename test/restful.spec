@@ -16,7 +16,7 @@ describe "DbAgile::Restful feature" do
   def basic_values_uri(extension = "")
     "#{database_name}/basic_values#{extension}"
   end
-      
+  
   describe "the GET interface" do
     it_should_behave_like "The Restful GET interface" 
   end

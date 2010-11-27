@@ -1,5 +1,5 @@
 module DbAgile
-  module Restful
+  module ComplexRestful
     class Client
       module Get
 

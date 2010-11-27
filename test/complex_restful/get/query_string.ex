@@ -7,5 +7,17 @@ describe "it should support projection through the query string" do
     }
   end
   
+  it "should correctly sort the table" do
+    client.get(suppliers_uri('.json'), {:sort_by => {:name => :asc}}){|res,http|
+      res.body.should be_a_valid_json_string
+      suppliers = JSON::parse(res.body)
+      suppliers.first["name"].should == "Adams"
+    }
+    client.get(suppliers_uri('.json'), {:sort_by => {:name => :desc}}){|res,http|
+      res.body.should be_a_valid_json_string
+      suppliers = JSON::parse(res.body)
+      suppliers.first["name"].should == "Smith"
+    }
+  end
   
 end

@@ -16,7 +16,11 @@ describe "DbAgile::ComplexRestful feature" do
   def basic_values_uri(extension = "")
     "#{database_name}/basic_values#{extension}"
   end
-      
+  
+  def suppliers_uri(extension = "")
+    "#{database_name}/suppliers#{extension}"
+  end
+        
   describe "the GET interface" do
     it_should_behave_like "The ComplexRestful GET interface" 
   end
@@ -27,6 +31,10 @@ describe "DbAgile::ComplexRestful feature" do
 
   describe "the DELETE interface" do
     it_should_behave_like "The ComplexRestful DELETE interface" 
+  end
+
+  describe "the PUT interface" do
+    it_should_behave_like "The ComplexRestful PUT interface" 
   end
 
 end

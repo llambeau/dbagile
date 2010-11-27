@@ -4,6 +4,7 @@ class DbAgile::ComplexRestful::Client < DbAgile::Restful::Client; end
 require 'dbagile/complex_restful/client/utils'
 require 'dbagile/complex_restful/client/get'
 require 'dbagile/complex_restful/client/post'
+require 'dbagile/complex_restful/client/put'
 require 'dbagile/complex_restful/client/delete'
 
 module DbAgile
@@ -15,6 +16,7 @@ module DbAgile
       include DbAgile::ComplexRestful::Client::Utils
       include DbAgile::ComplexRestful::Client::Get
       include DbAgile::ComplexRestful::Client::Post
+      include DbAgile::ComplexRestful::Client::Put
       include DbAgile::ComplexRestful::Client::Delete
 
     end # class Client
