@@ -15,7 +15,7 @@ module DbAgile
             filters = to_filters_definition(request.POST["filters"], heading)
             
             connection.transaction do |t|
-              t.delete(table, tuple)
+              t.delete(table, filters)
             end
             [ :json, [ JSON::generate(:ok => true) ] ]
           end

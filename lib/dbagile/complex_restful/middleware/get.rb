@@ -21,9 +21,12 @@ module DbAgile
             # ex: /url?sort_by[language]=desc&sort_by[project]=asc
             sort_by = to_sort_by_definition(request.GET["sort_by"], heading)
             
+            # windowing result if necessary
+            window = to_windowing_definition(request.GET["window"])
+            
             # Retrieve dataset
             columns = connection.column_names(table)
-            dataset = connection.dataset(table, filters, sort_by)
+            dataset = connection.dataset(table, filters, sort_by, window)
 
             # Make output now
             format ||= :json 

@@ -4,7 +4,7 @@ module DbAgile
       module TableDriven
 
         # @see DbAgile::Contract::Data::TableDriven#dataset
-        def dataset(table, proj = nil, sort = nil)
+        def dataset(table, proj = nil, sort = nil, window = nil)
           result = case table
             when Symbol
               (proj.nil? or proj.empty?) ? db[table] : db[table].where(proj)
@@ -20,6 +20,15 @@ module DbAgile
             end
           end
           result = (sort.nil? or sort.empty?) ? result : result.order(*sort)
+          
+          # Windowing
+          if window
+            if window[:offset]
+              result = result.limit(window[:limit], window[:offset])
+            else
+              result = result.limit(window[:limit])
+            end
+          end
           
           result.extend(::DbAgile::Contract::Data::Dataset)
           result
