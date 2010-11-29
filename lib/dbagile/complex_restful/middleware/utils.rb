@@ -4,18 +4,25 @@ module DbAgile
       module Utils
       
       # Transform sort_by http parameters to valid definition
-      def to_sort_by_definition(params)
-        sort_by = (params.nil? or params.empty?) ? {} : params
-        sort_by = ::JSON.parse(sort_by) unless sort_by.kind_of? Hash
-        sort_by.each_pair do |key, value|
-          sort_by[key] = (value.downcase == "desc") ? :desc : :asc
+      def to_sort_by_definition(params, heading)
+        params = (params.nil? or params.empty?) ? {} : params
+        params.delete_if? { |key, value| !heading.key?(key) }
+        params = ::JSON.parse(params) unless params.kind_of? Hash
+        sort_by = {}
+        params.each_pair do |key, value|
+          sort_by[key.to_sym] = (value.downcase == "desc") ? :desc : :asc
         end
       end
       
       # Transform filters http parameters to valid definition
-      def to_filters_definition(params)
-        filters = (params.nil? or params.empty?) ? {} : params
-        filters = ::JSON.parse(filters) unless filters.kind_of? Hash
+      def to_filters_definition(params, heading)
+        params = (params.nil? or params.empty?) ? {} : params
+        params.delete_if? { |key, value| !heading.key?(key) }
+        params = ::JSON.parse(params) unless params.kind_of? Hash
+        filters = {}
+        params.each_pair do |key, value|
+          filters[key.to_sym] = value
+        end
         filters
       end
       alias to_tuple_definition to_filters_definition

@@ -12,9 +12,8 @@ module DbAgile
             # filters parameter can be a JSON encoded hash or a simple get array
             # ex: /url?filters={"language":"ruby","project":"dbagile"}
             # ex: /url?filters[language]=ruby&filters[project]=dbagile
-            filters = to_filters_definition(request.POST["filters"])
+            filters = to_filters_definition(request.POST["filters"], heading)
             
-            tuple = params_to_tuple(filters, heading)
             connection.transaction do |t|
               t.delete(table, tuple)
             end

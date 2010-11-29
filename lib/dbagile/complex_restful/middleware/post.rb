@@ -17,9 +17,8 @@ module DbAgile
             # tuple parameter can be a JSON encoded hash or a simple get array
             # ex: /url?tuple={"language":"ruby","project":"dbagile"}
             # ex: /url?tuple[language]=ruby&tuple[project]=dbagile
-            tuple = to_tuple_definition(request.POST["tuple"])
+            tuple = to_tuple_definition(request.POST["tuple"], heading)
 
-            tuple = params_to_tuple(tuple, heading)
             inserted = connection.transaction do |t|
               t.insert(table, tuple)
             end

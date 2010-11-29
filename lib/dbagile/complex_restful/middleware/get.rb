@@ -14,19 +14,16 @@ module DbAgile
             # filters parameter can be a JSON encoded hash or a simple get array
             # ex: /url?filters={"language":"ruby","project":"dbagile"}
             # ex: /url?filters[language]=ruby&filters[project]=dbagile
-            filters = to_filters_definition(request.GET["filters"])
+            filters = to_filters_definition(request.GET["filters"], heading)
             
             # sort_by parameter can be a JSON encoded hash or a simple get array
             # ex: /url?sort_by={"language":"desc","project":"asc"}
             # ex: /url?sort_by[language]=desc&sort_by[project]=asc
-            sort_by = to_sort_by_definition(request.GET["sort_by"])
+            sort_by = to_sort_by_definition(request.GET["sort_by"], heading)
             
-            # Project
-            projection = params_to_tuple(filters, heading)
-        
             # Retrieve dataset
             columns = connection.column_names(table)
-            dataset = connection.dataset(table, projection, sort_by)
+            dataset = connection.dataset(table, filters, sort_by)
 
             # Make output now
             format ||= :json 
