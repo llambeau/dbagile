@@ -26,11 +26,21 @@ module DbAgile
             
             # Retrieve dataset
             columns = connection.column_names(table)
-            dataset = connection.dataset(table, filters, sort_by, window)
 
+            # Count without windowing
+            total = connection.dataset(table, filters, sort_by).count
+            
+            # Dataset with windowing
+            dataset = connection.dataset(table, filters, sort_by, window)
+            
             # Make output now
             format ||= :json 
-            [format, to_xxx_enumerable(format, dataset, columns)]
+            [format, to_xxx_enumerable(format, dataset, columns, {
+              :additional_infos => {
+                :success => true,
+                :total => total
+              }
+            })]
           end
         end
       

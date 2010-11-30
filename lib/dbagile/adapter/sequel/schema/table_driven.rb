@@ -26,6 +26,11 @@ module DbAgile
           db.table_exists?(name)
         end
     
+        # @see DbAgile::Contract::Schema::TableDriven#tables
+        def tables
+          db.tables
+        end
+      
         # @see DbAgile::Contract::Schema::TableDriven#heading
         def heading(table_name)
           heading = {}

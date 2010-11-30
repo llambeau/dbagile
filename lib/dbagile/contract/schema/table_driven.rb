@@ -17,6 +17,15 @@ module DbAgile
         end
       
         #
+        # Returns a list containing table names
+        # 
+        # @return the list of table names
+        #
+        def tables
+          Kernel.raise NotImplementedError
+        end
+      
+        #
         # Returns true if a column exists, false otherwise.
         #
         # A default implementation is provided that relies on column_names.

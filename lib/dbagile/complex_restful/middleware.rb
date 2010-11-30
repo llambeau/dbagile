@@ -1,6 +1,8 @@
 require 'dbagile/complex_restful'
+require 'dbagile/restful/middleware'
 class DbAgile::ComplexRestful::Middleware < DbAgile::Restful::Middleware; end
 
+require 'dbagile/complex_restful/io/extended_json'
 require 'dbagile/complex_restful/middleware/utils'
 require 'dbagile/complex_restful/middleware/get'
 require 'dbagile/complex_restful/middleware/post'

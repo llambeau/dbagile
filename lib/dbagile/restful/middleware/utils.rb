@@ -52,10 +52,10 @@ module DbAgile
         end
       
         # Converts a dataset-like object to an enumerable rack result
-        def to_xxx_enumerable(format, dataset, columns)
+        def to_xxx_enumerable(format, dataset, columns, options = {})
           buffer = StringIO.new
           method = "to_#{format}".to_sym
-          DbAgile::IO.send(method, dataset, columns, buffer)
+          DbAgile::IO.send(method, dataset, columns, buffer, options)
           [ buffer.string ]
         end
 
