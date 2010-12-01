@@ -23,7 +23,11 @@ module DbAgile
               t.insert(table, tuple)
             end
             
-            [format, to_xxx_enumerable(format, [ inserted ], tuple.keys)]
+            [format, to_xxx_enumerable(format, [ inserted ], tuple.keys, {
+							:additional_infos => {
+                :success => true
+							}
+						})]
           end
         end
       

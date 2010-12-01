@@ -15,7 +15,7 @@ describe "when no extension is provided" do
     
     # no other tuples should be created
     client.get(basic_values_uri('.json')){|res,http|
-       JSON::parse(res.body).size.should == 1
+       JSON::parse(res.body)["data"].size.should == 1
     }
   end
   

@@ -25,7 +25,11 @@ module DbAgile
               t.update(table, tuple, filters)
             end
             
-            [format, to_xxx_enumerable(format, [ updated ], tuple.keys)]
+            [format, to_xxx_enumerable(format, [ updated ], tuple.keys, {
+							:additional_infos => {
+                :success => true
+							}
+						})]
           end
         end
       

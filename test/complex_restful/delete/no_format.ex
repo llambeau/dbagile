@@ -11,7 +11,7 @@ describe "without extension /" do
     # all tuples should have been deleted
     client.get(basic_values_uri('.json')){|res,http|
       res.body.should be_a_valid_json_string
-      JSON::load(res.body).should == []
+      JSON::load(res.body)["data"].should == []
     }
   end
   
@@ -25,7 +25,7 @@ describe "without extension /" do
     # all tuples should have been deleted
     client.get(basic_values_uri('.json')){|res,http|
       res.body.should be_a_valid_json_string
-      JSON::load(res.body).size.should.should == 1
+      JSON::load(res.body)["data"].size.should.should == 1
     }
   end
   
