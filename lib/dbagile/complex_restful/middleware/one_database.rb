@@ -44,7 +44,10 @@ module DbAgile
           if ex.message =~ /exist/
             _404_(env)
           else
-            raise
+            [500, {"Content-Type" => "application/json"}, ::JSON.fast_generate({
+              :success => false, 
+              :message => ex.to_s
+            })]
           end
         end
               

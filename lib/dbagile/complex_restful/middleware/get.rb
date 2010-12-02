@@ -24,7 +24,7 @@ module DbAgile
             # windowing result if necessary
             window = to_windowing_definition(request.GET["window"])
             
-            # Retrieve dataset
+            # Retrieve column names
             columns = connection.column_names(table)
 
             # Count without windowing

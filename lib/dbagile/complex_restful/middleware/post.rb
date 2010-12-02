@@ -24,10 +24,10 @@ module DbAgile
             end
             
             [format, to_xxx_enumerable(format, [ inserted ], tuple.keys, {
-							:additional_infos => {
+              :additional_infos => {
                 :success => true
-							}
-						})]
+              }
+            })]
           end
         end
       

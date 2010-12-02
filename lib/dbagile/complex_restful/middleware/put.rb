@@ -25,11 +25,15 @@ module DbAgile
               t.update(table, tuple, filters)
             end
             
-            [format, to_xxx_enumerable(format, [ updated ], tuple.keys, {
-							:additional_infos => {
-                :success => true
-							}
-						})]
+            # Dataset of impacted tuples
+            dataset = connection.dataset(table, filters)
+            
+            [format, to_xxx_enumerable(format, dataset, heading, {
+              :additional_infos => {
+                :success => true,
+                :updated => [updated]
+              }
+            })]
           end
         end
       
